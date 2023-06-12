@@ -1,23 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import Npreview from './newspreview';
+import Prev from './preview2';
 
 function App() {
+
+  const [news, setnews] = useState([]);
+  const preview = news?.slice(0, 3);
+  const prev2 = news?.slice(3, news.length);
+  console.log(preview);
+
+  
+
+  useEffect(() => {
+    const allnews = async () => {
+      const res = await fetch("https://newsapi.org/v2/everything?q=india sports&apiKey=10e5ac0f27a74b4b81b602310f8c5e03").then(
+        res => {
+          return res.json();
+        }
+      ).catch(err => {
+        console.log(err);
+      });
+
+      setnews(res.articles);
+
+    }
+    allnews();
+  },[])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <center><p style={{ fontSize: "25px", fontWeight: "500" }}>Browse News</p></center>
+      <div className="news-container">
+      {news.length===0 && <h2>Loading...</h2>}
+        {news.length>0 && preview.map((item, index) => {
+          return <Npreview news={item} key={index} />
+        })}
+      </div>
+
+      <div className='news-container2'>
+        {prev2.map((item, index) => {
+          return <Prev key={index} news={item}></Prev>
+        })}
+      </div>
+
     </div>
   );
 }
