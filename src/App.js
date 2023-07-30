@@ -6,8 +6,8 @@ import Prev from './preview2';
 function App() {
 
   const [news, setnews] = useState([]);
-  const preview = news?.slice(0, 3);
-  const prev2 = news?.slice(3, news.length);
+  const [preview , setpreview] = useState([]);
+  const [prev2 , setprev2] = useState([]);
   console.log(preview);
 
   
@@ -16,14 +16,14 @@ function App() {
     const allnews = async () => {
       const res = await fetch("https://newsapi.org/v2/everything?q=india sports&apiKey=10e5ac0f27a74b4b81b602310f8c5e03").then(
         res => {
-          return res.json();
+          setnews(res.articles);
+          return;
         }
       ).catch(err => {
         console.log(err);
       });
-
-      setnews(res.articles);
-
+      
+      
     }
     allnews();
   },[])
