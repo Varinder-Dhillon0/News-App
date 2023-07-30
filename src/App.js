@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const allnews = async () => {
-      const res = await fetch("https://newsapi.org/v2/everything?q=india sports&apiKey=10e5ac0f27a74b4b81b602310f8c5e03").then(
+      const res = await fetch("https://saurav.tech/NewsAPI/everything/cnn.json").then(
         res => {
           console.log(res.articles);
           setnews(res.articles);
