@@ -19,7 +19,7 @@ function App() {
           console.log(res.articles);
           setnews(res.articles);
           setpreview(res.articles.slice(0,3));
-          setprev2(res.articles.slice(3, 15);
+          setprev2(res.articles.slice(3, 15));
           return;
         }
       ).catch(err => {
