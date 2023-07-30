@@ -16,7 +16,10 @@ function App() {
     const allnews = async () => {
       const res = await fetch("https://newsapi.org/v2/everything?q=india sports&apiKey=10e5ac0f27a74b4b81b602310f8c5e03").then(
         res => {
+          console.log(res.articles);
           setnews(res.articles);
+          setpreview(res.articles.slice(0,3));
+          setprev2(res.articles.slice(3, 15);
           return;
         }
       ).catch(err => {
