@@ -14,19 +14,17 @@ function App() {
 
   useEffect(() => {
     const allnews = async () => {
-      const res = await fetch("https://saurav.tech/NewsAPI/everything/cnn.json").then(
+      const res = await fetch("https://saurav.tech/NewsAPI/top-headlines/category/sports/in.json").then(
         res => {
-          console.log(res.articles);
-          setnews(res.articles);
-          setpreview(res.articles.slice(0,3));
-          setprev2(res.articles.slice(3, 15));
-          return;
+          return res.json();
         }
       ).catch(err => {
         console.log(err);
       });
-      
-      
+      console.log(res);
+      setnews(res.articles);
+      setpreview(res.articles.slice(0,3));
+      setprev2(res.articles.slice(3, 15));
     }
     allnews();
   },[])
